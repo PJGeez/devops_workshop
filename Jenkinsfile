@@ -2,7 +2,9 @@ pipeline {
     agent any
 
     environment {
-        PATH = "/usr/local/bin:/usr/bin:/bin:${env.PATH}"
+        PATH = "/home/prajwal/.nvm/versions/node/v25.5.0/bin:/usr/local/bin:/usr/bin:/bin:${env.PATH}"
+        JENKINS_NODE_COOKIE = 'dontKillMe'
+        BUILD_ID = 'dontKillMe'
     }
 
     stages {
@@ -40,7 +42,7 @@ pipeline {
                 echo 'STAGE 4: Deploying application to STAGING on Port 3001...'
                 echo '=================================================='
                 sh 'chmod +x ./scripts/deploy-staging.sh'
-                sh './scripts/deploy-staging.sh'
+                sh 'JENKINS_NODE_COOKIE=dontKillMe BUILD_ID=dontKillMe ./scripts/deploy-staging.sh'
             }
         }
 
@@ -60,7 +62,7 @@ pipeline {
                 echo 'STAGE 6: Promoting build to PRODUCTION on Port 3000...'
                 echo '=================================================='
                 sh 'chmod +x ./scripts/deploy-prod.sh'
-                sh './scripts/deploy-prod.sh'
+                sh 'JENKINS_NODE_COOKIE=dontKillMe BUILD_ID=dontKillMe ./scripts/deploy-prod.sh'
             }
         }
     }

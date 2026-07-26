@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevOps CI/CD Visual Demo</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Header Banner -->
+    <header class="main-header">
+      <div class="logo-area">
+        <div class="pulse-icon">⚡</div>
+        <div>
+          <h1>DevOps CI/CD Lab</h1>
+          <p class="subtitle">Automated Build • Test • Deploy Simulation</p>
+        </div>
+      </div>
+      <div class="env-badge" id="envBadge">
+        <span class="dot"></span>
+        <span id="envText">LOADING...</span>
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      <!-- Live Deploy Status Card -->
+      <section class="card hero-card">
+        <div class="card-header">
+          <h2>🚀 Live Deployment Card</h2>
+          <span class="port-tag" id="portTag">Port: ---</span>
+        </div>
+        <div class="hero-body">
+          <div class="visual-banner" id="visualBanner">
+            <h3 id="bannerTitle">Welcome to the CI/CD Pipeline Demo!</h3>
+            <p id="bannerDesc">Edit code in Git, push changes, and watch this card update automatically!</p>
+            <div class="badge-row">
+              <span class="feature-chip" id="featureChip">V1 Initial Release</span>
+              <span class="commit-chip" id="commitChip">Commit: short-sha</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Environment & Deployment Metadata -->
+      <section class="card metadata-card">
+        <div class="card-header">
+          <h2>📊 Server Metrics</h2>
+          <span class="refresh-indicator" id="refreshStatus">Live (1s)</span>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-item">
+            <span class="metric-label">App Version</span>
+            <span class="metric-value" id="valVersion">1.0.0</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Environment</span>
+            <span class="metric-value" id="valEnv">PRODUCTION</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Listening Port</span>
+            <span class="metric-value highlight" id="valPort">3000</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-label">Health Status</span>
+            <span class="metric-value status-online" id="valHealth">ONLINE</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CI/CD Lifecycle Diagram -->
+      <section class="card pipeline-card">
+        <div class="card-header">
+          <h2>🔄 CI/CD Pipeline Stages</h2>
+          <span class="info-tag">Jenkins & GitHub Actions</span>
+        </div>
+        <div class="pipeline-steps">
+          <div class="step completed">
+            <div class="step-icon">1</div>
+            <div class="step-info">
+              <h4>Git Checkout</h4>
+              <p>Pull latest commit</p>
+            </div>
+          </div>
+          <div class="step completed">
+            <div class="step-icon">2</div>
+            <div class="step-info">
+              <h4>Build & Install</h4>
+              <p>npm install & build</p>
+            </div>
+          </div>
+          <div class="step completed">
+            <div class="step-icon">3</div>
+            <div class="step-info">
+              <h4>Automated Tests</h4>
+              <p>Jest Unit & API Tests</p>
+            </div>
+          </div>
+          <div class="step active" id="deployStep">
+            <div class="step-icon">4</div>
+            <div class="step-info">
+              <h4 id="deployStepTitle">Deploy to Port</h4>
+              <p id="deployStepDesc">Staging (3001) / Prod (3000)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Hands-on Lab Challenge Box for Juniors -->
+      <section class="card lab-instructions-card">
+        <div class="card-header">
+          <h2>🛠️ Hands-on Lab Challenge for Juniors</h2>
+        </div>
+        <div class="instructions-content">
+          <ol class="steps-list">
+            <li><strong>Change Banner Text or Color:</strong> Open <code>public/index.html</code> or <code>public/style.css</code>.</li>
+            <li><strong>Commit & Push to Git:</strong> Run <code>git commit -m "Updated banner color"</code>.</li>
+            <li><strong>Trigger Jenkins / GitHub Actions:</strong> Watch the pipeline test and deploy code automatically to local port 3000 / 3001!</li>
+            <li><strong>Intentionally Fail a Test:</strong> Edit <code>test/app.test.js</code> to see how CI prevents broken code from deploying!</li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>DevOps CI/CD Lab Demonstration • Local Ports: <code>3000</code> (Production) & <code>3001</code> (Staging) • Powered by Jenkins & GitHub Actions</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

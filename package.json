@@ -1,0 +1,21 @@
+{
+  "name": "devops-cicd-demo-app",
+  "version": "1.0.0",
+  "description": "Visual CI/CD Demo Application for Jenkins and GitHub Actions Lab",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest --detectOpenHandles --forceExit",
+    "build": "node -e \"console.log('Build step completed successfully! Assets checked.')\""
+  },
+  "keywords": ["devops", "jenkins", "github-actions", "cicd", "demo"],
+  "author": "DevOps Lab",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  }
+}

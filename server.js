@@ -68,10 +68,10 @@ app.get('*', (req, res) => {
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`==================================================`);
-    console.log(`🚀 DevOps Demo App running on PORT: ${PORT}`);
-    console.log(`🌍 Environment: ${ENVIRONMENT.toUpperCase()}`);
-    console.log(`📦 Version: ${APP_VERSION}`);
-    console.log(`🔗 Access at: http://localhost:${PORT}`);
+    console.log(`   DevOps Demo App running on PORT: ${PORT}`);
+    console.log(`   Environment: ${ENVIRONMENT.toUpperCase()}`);
+    console.log(`   Version: ${APP_VERSION}`);
+    console.log(`   Access at: http://localhost:${PORT}`);
     console.log(`==================================================`);
   });
 }

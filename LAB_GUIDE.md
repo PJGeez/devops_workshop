@@ -51,19 +51,24 @@ Since Jenkins is already installed in your lab:
 3. Enter job name: `devops-visual-cicd-demo`.
 4. Select **Pipeline** and click **OK**.
 
-### Step 2: Configure the Pipeline
-1. Scroll down to the **Pipeline** section.
-2. Set **Definition** to `Pipeline script from SCM` (or paste the `Jenkinsfile` directly into `Pipeline script`).
-3. If using Git:
-   - SCM: **Git**
-   - Repository URL: Path to your repo or GitHub URL.
-   - Script Path: `Jenkinsfile`
-4. Click **Save**.
+### Step 2: Configure GitHub Repository & Automatic Git Triggers
+1. Scroll down to **Build Triggers**:
+   - Check **Poll SCM** and set Schedule to `* * * * *` (This tells Jenkins to check GitHub every 1 minute for new commits).
+   - *Alternative (If Jenkins is publicly accessible)*: Check **GitHub hook trigger for GPRC SCM polling**.
 
-### Step 3: Run the Pipeline
-1. Click **Build Now**.
-2. Click on the build number (e.g., `#1`) -> **Console Output** or **Stage View**.
-3. Watch each stage execute in real-time!
+2. Scroll down to the **Pipeline** section:
+   - **Definition**: Select `Pipeline script from SCM`
+   - **SCM**: Select `Git`
+   - **Repository URL**: Paste your GitHub URL (e.g., `https://github.com/YOUR_USERNAME/DevOps_jenkins_and_githubactions.git`)
+   - **Branch Specifier**: `*/main` (or `*/master`)
+   - **Script Path**: `Jenkinsfile`
+3. Click **Save**.
+
+### ⚡ How the Automatic Trigger Works When Code is Pushed:
+1. Student edits code (e.g. updates title or color in `public/index.html`).
+2. Student pushes to GitHub: `git commit -am "new feature" && git push origin main`.
+3. Jenkins detects the new commit automatically (via Poll SCM within 60s or Webhook instantly).
+4. Jenkins automatically starts the pipeline execution, runs tests, and updates `http://localhost:3000` live!
 
 ---
 

@@ -21,8 +21,16 @@ pipeline {
                 echo '=================================================='
                 echo 'STAGE 2: Installing dependencies and building...'
                 echo '=================================================='
-                sh 'npm install'
-                sh 'npm run build'
+                sh '''
+                    if ! command -v node &> /dev/null; then
+                      if [ -d "$HOME/.nvm/versions/node" ]; then
+                        export PATH="$(ls -d $HOME/.nvm/versions/node/* 2>/dev/null | tail -n 1)/bin:$PATH"
+                      fi
+                    fi
+                    export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
+                    npm install
+                    npm run build
+                '''
             }
         }
 
@@ -31,7 +39,15 @@ pipeline {
                 echo '=================================================='
                 echo 'STAGE 3: Running automated unit & API tests...'
                 echo '=================================================='
-                sh 'npm test'
+                sh '''
+                    if ! command -v node &> /dev/null; then
+                      if [ -d "$HOME/.nvm/versions/node" ]; then
+                        export PATH="$(ls -d $HOME/.nvm/versions/node/* 2>/dev/null | tail -n 1)/bin:$PATH"
+                      fi
+                    fi
+                    export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
+                    npm test
+                '''
             }
         }
 
@@ -41,7 +57,7 @@ pipeline {
                 echo 'STAGE 4: Deploying application to STAGING on Port 3001...'
                 echo '=================================================='
                 sh 'chmod +x ./scripts/deploy-staging.sh'
-                sh 'JENKINS_NODE_COOKIE=dontKillMe BUILD_ID=dontKillMe ./scripts/deploy-staging.sh'
+                sh './scripts/deploy-staging.sh'
             }
         }
 
@@ -61,7 +77,7 @@ pipeline {
                 echo 'STAGE 6: Promoting build to PRODUCTION on Port 3000...'
                 echo '=================================================='
                 sh 'chmod +x ./scripts/deploy-prod.sh'
-                sh 'JENKINS_NODE_COOKIE=dontKillMe BUILD_ID=dontKillMe ./scripts/deploy-prod.sh'
+                sh './scripts/deploy-prod.sh'
             }
         }
     }

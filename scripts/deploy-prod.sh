@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 set -e
 
-# Auto-locate Node.js & npm if not in PATH (e.g. NVM installations)
-export PATH="/home/prajwal/.nvm/versions/node/v25.5.0/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
+# Dynamically locate Node.js & npm across different user accounts and NVM setups
+if ! command -v node &> /dev/null; then
+  if [ -d "$HOME/.nvm/versions/node" ]; then
+    LATEST_NVM_NODE=$(ls -d "$HOME/.nvm/versions/node/"* 2>/dev/null | tail -n 1)
+    if [ -n "$LATEST_NVM_NODE" ]; then
+      export PATH="$LATEST_NVM_NODE/bin:$PATH"
+    fi
+  fi
+fi
+export PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
 
 PORT=3000
 ENV="production"
